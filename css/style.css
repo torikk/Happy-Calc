@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    padding-top:100px;
+    padding:100px 0;
     
 }
 
@@ -45,6 +45,10 @@ button {
     border:none;
 }
 
+button:hover {
+   color:#e4574e;
+}
+
 #AnimationContainer {
     margin:auto;
     width:95%;
@@ -56,6 +60,10 @@ button {
     margin: auto;
     width: 88%;
     height: 67px;
+    font-family: 'Quantico', sans-serif;
+    color:#f3f3f3;
+    font-size: 48px;
+    padding-top: 81px;
 
 }
 
@@ -71,12 +79,6 @@ button {
 
 /* TEXT */
 
-.screenText {
-    font-family: 'Quantico', sans-serif;
-    color:#f3f3f3;
-    font-size: 48px;
-    padding-top: 81px;
-}
 
 .ani-btn {
     color:#f3f3f3;
