@@ -19,52 +19,53 @@
 <div class="flex-container">
     <div class="centerContent">
      
-       <div class="calculatorBody">
-       
-       <div class="flex-row">
-           <div class="screen">
-               <div id="AnimationContainer"></div>
-               <div id="AnswerContainer">HELLO</div>
-               <div id="ProblemContainer">123</div>
-           </div>
-        </div>
-        <div class="flex-row">
-            <button class="calc-btn" id="clear">AC</button>
-            <button class="calc-btn">+/-</button>
-            <button class="calc-btn">%</button>
-            <button class="calc-btn">/</button>
-        </div>
-        <div class="flex-row">
-            <button class="calc-btn">7</button>
-            <button class="calc-btn">8</button>
-            <button class="calc-btn">9</button>
-            <button class="calc-btn">x</button>
-        </div>
-        <div class="flex-row">
-            <button class="calc-btn">4</button>
-            <button class="calc-btn">5</button>
-            <button class="calc-btn">6</button>
-            <button class="calc-btn">-</button>
-        </div>
-         <div class="flex-row">
-            <button class="calc-btn">1</button>
-            <button class="calc-btn">2</button>
-            <button class="calc-btn">3</button>
-            <button class="calc-btn">+</button>
-        </div>
-        <div class="flex-row">
-            <button class="calc-btn">0</button>
-            <button class="calc-btn">&nbsp;</button>
-            <button class="calc-btn">.</button>
-            <button class="calc-btn" id="equal" onclick="mathCalc()">=</button>
-        </div>
-        <div class="flex-row" id="animations">
-            <button class="ani-btn">♡</button>
-            <button class="ani-btn">π</button>
-            <button class="ani-btn">☺</button>
-            <button class="ani-btn">@</button>
-        </div>
-        
+       <div class="calculator">
+            <div class="calculator__display">
+               <div class="flex-row">
+                       <div id="AnimationContainer"></div>
+                       <div id="AnswerContainer">0</div>
+                       <div id="ProblemContainer"></div>
+                   </div>
+            </div>
+            
+            <div class="calculator__keys">
+                <div class="flex-row">
+                    <button class="calc-btn" id="clear" data-action="clear">AC</button>
+                    <button class="calc-btn" data-action="posneg">+/-</button>
+                    <button class="calc-btn" data-action="percent">%</button>
+                    <button class="calc-btn key--operator" data-action="divide">/</button>
+                </div>
+                <div class="flex-row">
+                    <button class="calc-btn">7</button>
+                    <button class="calc-btn">8</button>
+                    <button class="calc-btn">9</button>
+                    <button class="calc-btn key--operator" data-action="multiply">x</button>
+                </div>
+                <div class="flex-row">
+                    <button class="calc-btn">4</button>
+                    <button class="calc-btn">5</button>
+                    <button class="calc-btn">6</button>
+                    <button class="calc-btn key--operator" data-action="subtract">-</button>
+                </div>
+                 <div class="flex-row">
+                    <button class="calc-btn">1</button>
+                    <button class="calc-btn">2</button>
+                    <button class="calc-btn">3</button>
+                    <button class="calc-btn key--operator" data-action="add">+</button>
+                </div>
+                <div class="flex-row">
+                    <button class="calc-btn">0</button>
+                    <button class="calc-btn" data-action="nothing">&nbsp;</button>
+                    <button class="calc-btn" data-action="decimal">.</button>
+                    <button class="calc-btn key--equal" data-action="calculate" id="equal">=</button>
+                </div>
+                <div class="flex-row" id="animations">
+                    <button class="ani-btn" data-action="love" >♡</button>
+                    <button class="ani-btn" data-action="pi" >π</button>
+                    <button class="ani-btn" data-action="happy" >☺</button>
+                    <button class="ani-btn" data-action="contact"  onclick="dateGreeting()">@</button>
+                </div>
+            </div>
         </div>
       
    
@@ -74,7 +75,13 @@
 </div>
 
 
-
+<script>
+$(document).ready(function() {
+    $('button').on('click', function(e) {
+        console.log('e', e.target.innerHTML);
+    });
+});
+</script>
     <script src="script.js"></script>
     <script src="math.js" type="text/javascript"></script> 
     </body>
