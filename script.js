@@ -10,29 +10,77 @@ function dateGreeting() {
     } else {
         greeting = "Good evening!";
     }
-    document.getElementById("AnswerContainer").innerHTML = greeting;
+    var animation = document.getElementById("AnimationContainer");
+    animation.classList.add("active");
+    animation.classList.remove("inactive");
+    animation.innerHTML = greeting;
 }
 
-// NOTE: 
-// This is the final source code file for a blog post "How to build a calculator". You can follow the lesson at https://zellwk.com/blog/calculator-part-1
 
+//CALCULATION FUNCTION
 const calculate = (n1, operator, n2) => {
+    
+    var n1 = n1;
+    var n2 = n2;
+    var n1Percent = n1.includes("%");
+    var n2Percent = n2.includes("%");
+    
+    if (n1Percent === true && n2Percent === true) {
+        n1 = parseFloat(n1);
+        n1 = n1 / 100;
+        n2 = parseFloat(n2);
+        n2 = n2 / 100;
+    } else if (n1Percent === true) {
+        n1 = parseFloat(n1);
+        n1 = n1 / 100;
+        n2 = parseFloat(n2);
+    } else if (n2Percent === true) {
+        n1 = parseFloat(n1);
+        n2 = parseFloat(n2);
+        n2 = n2 / 100;
+    } else {
+        n1 = parseFloat(n1);
+        n2 = parseFloat(n2);
+    }
+  
   let result = ''
   if (operator === 'add') {
-    result = parseFloat(n1) + parseFloat(n2)
+    result = n1 + n2;
   } else if (operator === 'subtract') {
-    result = parseFloat(n1) - parseFloat(n2)
+    result = n1 - n2;
   } else if (operator === 'multiply') {
-    result = parseFloat(n1) * parseFloat(n2)
+    result = n1 * n2;
   } else if (operator === 'divide') {
-    result = parseFloat(n1) / parseFloat(n2)
+    result = n1 / n2;
   }
 
-  return result
+  return result;
 }
 
+
+
+//SYMBOL FUNCTION
+const symbol = (n1, operator, n2) => {
+      let result = ''
+  if (operator === 'add') {
+    result = n1 + ' + ' + n2;
+  } else if (operator === 'subtract') {
+    result = n1 + ' - ' + n2;
+  } else if (operator === 'multiply') {
+    result = n1 + ' x ' + n2;
+  } else if (operator === 'divide') {
+    result = n1 + ' / ' + n2;
+  }
+
+  return result;
+}
+
+
+
+//CALCULATOR
 const calculator = document.querySelector('.calculator')
 const display = calculator.querySelector('#AnswerContainer')
+const problemDisplay = calculator.querySelector('#ProblemContainer')
 const keys = calculator.querySelector('.calculator__keys')
 
 keys.addEventListener('click', e => {
@@ -45,19 +93,53 @@ keys.addEventListener('click', e => {
 
     Array.from(key.parentNode.children)
       .forEach(k => k.classList.remove('is-depressed'))
-
+      
+//NUMBERS
     if (!action) {
       if (displayedNum === '0' || previousKeyType === 'operator') {
         display.textContent = keyContent
+         calculator.dataset.previousKeyType = 'numbers'
+      } else if (previousKeyType === 'percent') {
+        display.textContent
       } else {
         display.textContent = displayedNum + keyContent
+        calculator.dataset.previousKeyType = 'numbers'
       }
     }
-
+      
+//DECIMALS
     if (action === 'decimal') {
-      display.textContent = displayedNum + '.'
+          if (previousKeyType === 'decimal') {
+            display.textContent = displayedNum + '';
+          } else {
+            display.textContent = displayedNum + '.';
+            calculator.dataset.previousKeyType = 'decimal'  
+          }
     }
-
+      
+//PERCENTS
+    if (action === 'percent') {
+          if (previousKeyType === 'percent' || displayedNum === '0' || previousKeyType === 'operator') {
+            display.textContent = displayedNum + '';
+          } else {
+            display.textContent = displayedNum + '%';
+            calculator.dataset.previousKeyType = 'percent'  
+          }
+    }
+      
+//POSNEG
+    if (action === 'posneg') {
+          if (previousKeyType === 'neg' ) {
+            display.textContent = displayedNum.slice(1);
+              calculator.dataset.previousKeyType = 'pos' 
+              
+          } else {
+            display.textContent = '-' + displayedNum;
+            calculator.dataset.previousKeyType = 'neg'  
+          }
+    }
+      
+//OPERATORS
     if (
       action === 'add' ||
       action === 'subtract' ||
@@ -69,17 +151,22 @@ keys.addEventListener('click', e => {
       calculator.dataset.firstValue = displayedNum
       calculator.dataset.operator = action
     }
-
+      
+//CLEAR
     if (action === 'clear') {
-      console.log('clear key!')
+      display.textContent = '0'
+      calculator.dataset.firstValue = '0'
+      calculator.dataset.previousKeyType = 'clear'
     }
-
+      
+//EQUAL
     if (action === 'calculate') {
       const firstValue = calculator.dataset.firstValue
       const operator = calculator.dataset.operator
       const secondValue = displayedNum
 
       display.textContent = calculate(firstValue, operator, secondValue)
+      problemDisplay.textContent = symbol(firstValue, operator, secondValue)
     }
   }
 })

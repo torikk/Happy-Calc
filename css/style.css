@@ -36,6 +36,14 @@ body {
     margin:auto;
 }
 
+.inactive {
+    display:none;
+}
+
+.active {
+    display:block;
+}
+
 button {
     width:24%;
     background:transparent;
@@ -53,7 +61,11 @@ button:hover {
     margin:auto;
     width:95%;
     height:150px;
-    display:none;
+    font-family: 'Quantico', sans-serif;
+    font-size: 48px;
+    color:#f3f3f3;
+    padding-top:10px;
+    overflow: hidden;
 }
 
 #AnswerContainer {
@@ -64,7 +76,7 @@ button:hover {
     color:#f3f3f3;
     font-size: 48px;
     padding-top: 81px;
-
+    overflow: hidden;
 }
 
 #ProblemContainer{
@@ -75,6 +87,10 @@ button:hover {
     font-size:24px;
     font-family: arial,  sans-serif;
     
+}
+
+button:focus {
+outline: none!important;
 }
 
 /* TEXT */
