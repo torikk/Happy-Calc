@@ -69,7 +69,7 @@ const symbol = (n1, operator, n2) => {
   } else if (operator === 'multiply') {
     result = n1 + ' x ' + n2;
   } else if (operator === 'divide') {
-    result = n1 + ' / ' + n2;
+    result = n1 + ' ÷ ' + n2;
   }
 
   return result;
@@ -157,6 +157,7 @@ keys.addEventListener('click', e => {
       display.textContent = '0'
       calculator.dataset.firstValue = '0'
       calculator.dataset.previousKeyType = 'clear'
+      problemDisplay.textContent = ''
     }
       
 //EQUAL
@@ -164,7 +165,7 @@ keys.addEventListener('click', e => {
       const firstValue = calculator.dataset.firstValue
       const operator = calculator.dataset.operator
       const secondValue = displayedNum
-
+      calculator.dataset.previousKeyType = 'operator'
       display.textContent = calculate(firstValue, operator, secondValue)
       problemDisplay.textContent = symbol(firstValue, operator, secondValue)
     }
