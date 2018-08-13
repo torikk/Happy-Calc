@@ -67,7 +67,7 @@ const symbol = (n1, operator, n2) => {
   } else if (operator === 'subtract') {
     result = n1 + ' - ' + n2;
   } else if (operator === 'multiply') {
-    result = n1 + ' x ' + n2;
+    result = n1 + ' × ' + n2;
   } else if (operator === 'divide') {
     result = n1 + ' ÷ ' + n2;
   }
